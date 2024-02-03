@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from dotenv import load_dotenv
-from pandasai import PandasAI
+from pandasai import SmartDataframe
 from pandasai.llm.openai import OpenAI
 import os
 
@@ -19,9 +19,10 @@ if uploaded_file is not None:
         else:
             st.warning("Please enter a Prompt. ")
             
-load_dotenv()
+    load_dotenv()
 
-my_token = os.getenv("OPENAI_API_KEY")
+    my_token = os.getenv("OPENAI_API_KEY")
 
-llm = OpenAI(my_token)
-pandas_ai = PandasAI(llm)
+    llm = OpenAI(my_token)
+    pandas_ai = SmartDataframe(df, config={"llm": llm})
+
